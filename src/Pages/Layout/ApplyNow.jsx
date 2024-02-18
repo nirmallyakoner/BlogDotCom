@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -27,6 +27,12 @@ export default function ApplyNow() {
       [e.target.name]: e.target.value,
     });
   };
+  useEffect(() => {
+    if (apply?.message === "you apply course Successfully") {
+      toast(apply?.message);
+      navigate("/course");
+    }
+  }, [apply]);
 
   const handleSubmit = async (id) => {
     id.e.preventDefault();
@@ -37,8 +43,8 @@ export default function ApplyNow() {
     const resData = res?.data;
     setApply(resData);
     console.log(apply);
-    toast(apply?.message);
     if (apply?.message === "you apply course Successfully") {
+      toast(apply?.message);
       navigate("/course");
     }
   };
@@ -172,7 +178,7 @@ export default function ApplyNow() {
           src="https://images.pexels.com/photos/2519812/pexels-photo-2519812.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
           alt=""
           style={{
-            height: "823px",
+            height: "863px",
             marginTop: "48px",
             width: "700px",
             borderTopRightRadius: "20px",
